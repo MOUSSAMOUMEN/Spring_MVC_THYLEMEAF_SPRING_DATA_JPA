@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.naming.Binding;
-import java.util.List;
-
 @Controller
 @AllArgsConstructor
 public class PatientController {
@@ -51,11 +48,9 @@ public class PatientController {
     }
 
     @PostMapping(path="/save")
-
     public String save(Model model, @Valid Patient patient, BindingResult bindingResult,
                        @RequestParam(defaultValue = "0") int page,
                        @RequestParam(defaultValue = "") String keyword){
-
         if(bindingResult.hasErrors()) return "formPatients";
         patientRepository.save(patient);
         return "redirect:/index?page="+page+"&keyword="+keyword;
